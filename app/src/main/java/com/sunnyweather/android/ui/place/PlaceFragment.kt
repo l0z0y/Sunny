@@ -48,7 +48,6 @@ class PlaceFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val layoutManager = LinearLayoutManager(activity)
 
-
         if (viewModel.isPlaceSaved()&& activity is MainActivity) {
             val place = viewModel.getSavedPlace()
             val intent = Intent(context, WeatherActivity::class.java).apply {
@@ -60,7 +59,6 @@ class PlaceFragment : Fragment() {
             activity?.finish()
             return
         }
-
 
 
         recyclerView.layoutManager = layoutManager
