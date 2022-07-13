@@ -13,6 +13,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sunnyweather.android.MainActivity
 import com.sunnyweather.android.R
 import com.sunnyweather.android.WeatherActivity
 import com.sunnyweather.android.ui.place.PlaceAdapter
@@ -48,7 +49,7 @@ class PlaceFragment : Fragment() {
         val layoutManager = LinearLayoutManager(activity)
 
 
-        if (viewModel.isPlaceSaved()) {
+        if (viewModel.isPlaceSaved()&& activity is MainActivity) {
             val place = viewModel.getSavedPlace()
             val intent = Intent(context, WeatherActivity::class.java).apply {
                 putExtra("location_lng", place.location.lng)
@@ -65,8 +66,8 @@ class PlaceFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
         adapter = PlaceAdapter(this, viewModel.placeList)
         recyclerView.adapter = adapter
-        searchPlaceEdit.addTextChangedListener {
 
+        searchPlaceEdit.addTextChangedListener {
             val content = it.toString()
             if (content.isNotEmpty()) {
                 viewModel.searchPlaces(content)
